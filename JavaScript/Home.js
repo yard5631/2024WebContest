@@ -1,3 +1,4 @@
+//hamburgermenu
 const hamburger = document.querySelector('.hamburger');
 const menu = document.querySelector('.menu');
 
@@ -11,5 +12,5 @@ function toggleClasses() {
     menu.classList.toggle('open');
 }
 
-setTimeout(toggleClasses, 500);
-setTimeout(toggleClasses, 3000);
+
+//scroll underline action
