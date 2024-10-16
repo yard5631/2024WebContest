@@ -6,7 +6,6 @@ hamburger.addEventListener('click', () => {
     toggleClasses();
 });
 
-
 function toggleClasses() {
   hamburger.classList.toggle('open');
     menu.classList.toggle('open');
@@ -14,12 +13,31 @@ function toggleClasses() {
 
 
 //loading window
-document.addEventListener("DOMContentLoaded", function (event) {
-  // js-textというクラスを取得し、elementsという変数を宣言
-  let elements = document.getElementsByClassName("loadingtext");
+const element = document.querySelector(".loader");
+let fadeoutFlag = true;
+// セッションストレージからフラグを取得
+const isFirstLoad = sessionStorage.getItem('isFirstLoad');
+
+// ページの読み込みが完了したときに実行される関数
+document.addEventListener('DOMContentLoaded', function() {
+  // フラグがない場合（初回アクセス時）
+  if (!isFirstLoad) {
+    // 初回アクセス時の処理を記述
+    element.style = "display: block;";
+      // js-textというクラスを取得し、elementsという変数を宣言
+
   // animateTextという関数を、elementsの文字数の回数繰り返す
-  for (var i = 0; i < elements.length; i++) {
-      animateText(elements[i]);
+  // for (var i = 0; i < element.children[0].length; i++) {
+      animateText(element.children[0]);
+  // }
+    console.log('初回アクセスです');
+    
+    // セッションストレージにフラグを保存
+    sessionStorage.setItem('isFirstLoad', true);
+  } else {
+    // 2回目以降のアクセス時の処理を記述
+    console.log('2回目以降のアクセスです');
+    element.style = "display: none;";
   }
 });
 
@@ -48,6 +66,7 @@ function animateText(element) {
 }
 function FadeoutWindow(){
   $('.loader').fadeOut(800);
+  fadeoutFlag = false;
 }
 window.onload=function(){
   setTimeout(function(){FadeoutWindow();},3000)
